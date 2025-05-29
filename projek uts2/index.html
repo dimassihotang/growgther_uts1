@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowGether - Read. Learn. Grow-Together</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #ffb580, #FFA25E);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgb(33, 29, 29);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00f9a6;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: rgb(33, 29, 29);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -50%;
+            width: 50%;
+            height: 100%;
+            background: #fff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transition: right 0.3s ease-in-out;
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .mobile-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: #ff6b35;
+        }
+
+        .close-menu {
+            align-self: flex-end;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ffe3cd, #ff9e4f);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: rgb(56, 53, 53);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-logo {
+            width: 300px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: #ff6b35;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: "📚";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .features li:nth-child(2)::before {
+            content: "🎨";
+        }
+
+        .features li:nth-child(3)::before {
+            content: "🌱";
+        }
+
+        .book-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .book-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .book-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .book-level {
+            background: #ff6b35;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .book-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .program-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .program-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .program-description {
+            color: #666;
+        }
+
+        /* Preview Section */
+        .preview {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .preview-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .preview-content {
+            padding: 20px;
+        }
+
+        .preview-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .preview-price {
+            color: #ff6b35;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .buy-button {
+            background: #ff6b35;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .buy-button:hover {
+            background: #ff5722;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c5282;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #ff6b35;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ff6b35;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .submit-button {
+            background: #ff6b35;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #ff5722;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .book-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-logo {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-logo {
+                width: 200px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <img src="assets/logo.png" alt="GrowGether Logo" class="logo">
+            <ul class="nav-links">
+                <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#tentang-kami" onclick="scrollToSection('tentang-kami')">Tentang Kami</a></li>
+                <li><a href="#preview" onclick="scrollToSection('preview')">Preview</a></li>
+                <li><a href="#alasan-memilih-kami" onclick="scrollToSection('alasan-memilih-kami')">Alasan Memilih Kami</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <span class="close-menu">&times;</span>
+            <ul>
+                <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#tentang-kami" onclick="scrollToSection('tentang-kami')">Tentang Kami</a></li>
+                <li><a href="#preview" onclick="scrollToSection('preview')">Preview</a></li>
+                <li><a href="#alasan-memilih-kami" onclick="scrollToSection('alasan-memilih-kami')">Alasan Memilih Kami</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="assets/logo.png" alt="GrowGether Characters" class="hero-logo">
+            <h1>🎨 "Warnai Duniamu dengan GrowGether!" 🎨</h1>
+            <p class="hero-tagline">Read. Learn. Grow-Together.</p>
+            <p class="hero-description">
+                Ayo, kembangkan imajinasi si kecil dengan buku mewarnai dari GrowGether! Setiap 
+                halaman adalah petualangan baru yang menggugah anak untuk:<br><br>
+                📖 <strong>READ</strong> – Temukan cerita di setiap gambar.<br>
+                🎨 <strong>LEARN</strong> – Asah kreativitas dan motorik halus.<br>
+                🌱 <strong>GROW</strong> – Tumbuh bersama warna-warni ceria!
+            </p>
+            <p style="margin-bottom: 30px;">
+                Dapatkan buku mewarnai premium kami sekarang dan buat momen belajar jadi lebih seru!
+            </p>
+            <a href="#" class="cta-button" onclick="viewAvailableMaterials()">View Available Materials</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang-kami" class="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Kami</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Tentang Kreativitasmu dengan Buku Mewarnai Ber-Level dari GrowGether!</h3>
+                    <p><strong>PROGRAM LEARNING</strong></p>
+                    <h4>Pemula? Jago Mewarnai? Kami Punya Level untuk Semua!</h4>
+                    <p>
+                        Dari gambar sederhana hingga ilustrasi yang menantang, setiap halaman di GrowGether dirancang untuk mengasah skill mewarnaimu setingkat demi setingkat!
+                    </p>
+                    
+                    <h4 style="margin-top: 30px;">PROGRAM LEARNING</h4>
+                    <p><strong>Punya BANYAK Desain & Variasi Warna?</strong><br>
+                    Kami punya LEVEL BERBEDA untuk semua usia & skill!</p>
+                    
+                    <ul class="features">
+                        <li><strong>Simple & Fun</strong> (Anak-anak/Pemula) – Gambar luas, garis warna dasar.</li>
+                        <li><strong>Creative Challenge</strong> (Remaja/Intermediate) – Detail lebih, pola unik, mix & match warna.</li>
+                        <li><strong>Masterpiece Mode</strong> (Dewasa/Advanced) – Ilustrasi kompleks, gradasi warna, mix art.</li>
+                    </ul>
+                </div>
+                <div class="book-showcase">
+                    <div class="book-item">
+                        <img src="assets/dasar.png" alt="Level Dasar - Kura-kura" class="book-image">
+                        <h4 class="book-title">Warnai Aku, Tulis Aku!</h4>
+                        <span class="book-level">Level Dasar - Aku Masih Belajar!</span>
+                        <p class="book-description">Warnai gambar sesuai contoh & hubungkan titik-titiknya</p>
+                        <p style="font-weight: bold; margin-bottom: 15px;">K U R A - K U R A</p>
+                    </div>
+                    <div class="book-item">
+                        <img src="assets/gam2.png" alt="Level Menengah - Gurita" class="book-image">
+                        <h4 class="book-title">Warnai Aku, Tulis Aku!</h4>
+                        <span class="book-level" style="background: #ffa726;">Level Menengah - Aku Sudah Jago!</span>
+                        <p class="book-description">Warnai gambar sesuai contoh & hubungkan titik-titiknya</p>
+                        <p style="font-weight: bold;">G U R I T A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="alasan-memilih-kami" class="programs">
+        <div class="container">
+            <h2 class="section-title">Alasan Memilih Kami</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-icon">📱</div>
+                    <h3 class="program-title">Instant Download</h3>
+                    <p class="program-description">"Dapatkan file langsung setelah pembayaran, tanpa tunggu pengiriman!"</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🖨️</div>
+                    <h3 class="program-title">Bisa Dicetak Berka-kali</h3>
+                    <p class="program-description">"Cetak sendiri sepuasnya untuk anak atau hadiah ke teman!"</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">📱</div>
+                    <h3 class="program-title">Warnai di Tablet/HP</h3>
+                    <p class="program-description">"Bisa diwarnai langsung di aplikasi (Procreate, IbisPaint, dll.)"</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🎨</div>
+                    <h3 class="program-title">100+ Gambar Edukatif</h3>
+                    <p class="program-description">"Tema lengkap: hewan, alam, profesi, dengan level kesulitan berbeda."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section id="preview" class="preview">
+        <div class="container">
+            <h2 class="section-title">Preview</h2>
+            <div class="preview-grid">
+                <div class="preview-card">
+                    <img src="assets/jual1.png" alt="Growgether Book 1" class="preview-image">
+                    <div class="preview-content">
+                        <h3 class="preview-title">Growgether</h3>
+                        <p style="color: #666; margin-bottom: 10px;">Grow ID$</p>
+                        <p class="preview-price">Rp. 15.000</p>
+                        <a href="http://lynk.id/dimas15/dlr74jyp0kx1/checkout" class="buy-button" target="_blank">BELI</a>
+                    </div>
+                </div>
+                <div class="preview-card">
+                    <img src="assets/jual2.png" alt="Growgether Book 2" class="preview-image">
+                    <div class="preview-content">
+                        <h3 class="preview-title">Growgether</h3>
+                        <p style="color: #666; margin-bottom: 10px;">Grow ID$</p>
+                        <p class="preview-price">Rp. 15.000</p>
+                        <a href="http://lynk.id/dimas15/9g65moomqk9q/checkout" class="buy-button" target="_blank">BELI</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GrowGether</h3>
+                    <p>Read. Learn. Grow-Together</p>
+                    <p>GrowGether merupakan sebuah brand yang hadir untuk membantu orang tua dalam mendidik buah hatinya melalui media buku mewarnai yang edukatif sehingga dapat memberikan dampak yang menggembikan.</p>
+                    <p style="margin-top: 20px;">
+                        📍 Jawa Timur, Lamongan, Sukorame, Daya Bakti<br>
+                        📧 Telp: 081234567890
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>GrowGether</h3>
+                    <ul>
+                        <li><a href="#tentang-kami">Tentang</a></li>
+                        <li><a href="#preview">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#preview">E-Book</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                    <div class="contact-form" style="margin-top: 20px;">
+                        <input type="email" placeholder="Email" required>
+                        <textarea placeholder="Comment" rows="3" required></textarea>
+                        <button type="submit" class="submit-button">SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Growgether ©2025 All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Close mobile menu if open
+                const mobileMenu = document.querySelector('.mobile-menu');
+                mobileMenu.classList.remove('active');
+            }
+        }
+
+        function viewAvailableMaterials() {
+            window.open('https://lynk.id/dimas15', '_blank');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Pesan Anda telah terkirim.');
+            this.reset();
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.querySelector('.close-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
